@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Windows.Input;
+using System.Threading;
 
 
 namespace Kongolian_Auto_Clicker
@@ -18,17 +20,28 @@ namespace Kongolian_Auto_Clicker
 
         //Imports system tools so that the program can actually click.
         [DllImport("user32.dll")]
+        public static extern int GetAsyncKeyState(Int32 i);
+
+
+        [DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
 
 
 
         //Mouse actions
-        private const int MOUSEEVENTF_LEFTDOWN = 0x02;  // only left clicks atm.
+        private const int MOUSEEVENTF_LEFTDOWN = 0x02;  // LeftClicks
         private const int MOUSEEVENTF_LEFTUP = 0x04;
+        private const int MOUSEEVENTF_RIGHTDOWN = 0x08;  // RightClicks
+        private const int MOUSEEVENTF_RIGHTUP = 0x10;
 
 
         public bool Toggle = false;
         int clicks = 0;
+
+
+        public bool MBToggle = false; // mouse Button toggle
+
+
 
 
 
@@ -36,10 +49,17 @@ namespace Kongolian_Auto_Clicker
         public bool check;
 
 
+        // this is for the keybinds stuff
+
+        bool KBRunning = true;
+        bool Pressed = false;
+
+
 
         private void AutoClicker_Load(object sender, EventArgs e)
         {
-            // Nothing needs to be initiliased.
+            Thread KB = new Thread(keyBind);
+            KB.Start();
         }
 
 
@@ -76,6 +96,7 @@ namespace Kongolian_Auto_Clicker
         private void BtnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+            KBRunning = false;
         }
 
 
@@ -147,17 +168,95 @@ namespace Kongolian_Auto_Clicker
             }
         }
 
+        //Toggle Button allows you to choose between left and right click.
+        private void btnButtonToggle_Click(object sender, EventArgs e)
+        {
+            if (MBToggle == true)
+            {
+                MBToggle = false;
+                btnButtonToggle.Text = "Left Click";
+            }
+            else
+            {
+                MBToggle = true;
+                btnButtonToggle.Text = "Right Click";
+
+
+            }
+        }
+
+        private void keyBind()
+        {
+            while (KBRunning)
+            {
+
+
+
+                int keystate = GetAsyncKeyState(88);
+
+                if (keystate == 32769)
+                {
+                    Pressed = !Pressed;
+                }
+
+                if (Pressed == true)
+                {
+                    Thread.Sleep(Interval.Interval);
+
+                    Interval.Enabled = false;
+
+                    clicks++;
+                    TBClicks.Text = clicks.ToString();
+                    //Call the imported function with the cursor's current position
+                    int X = (int)Cursor.Position.X;
+                    int Y = (int)Cursor.Position.Y;
+
+
+                    if (MBToggle == true)
+                    {
+                        mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, X, Y, 0, 0); // Right click mouse event.
+
+                    }
+                    else
+                    {
+                        mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0); // Left click mouse event.
+                    }
+
+                }
+
+
+
+            
+
+            }
+
+        }
+
+
+
+
+
+        // does the actual clicking
         private void Interval_Tick(object sender, EventArgs e)
         {
             clicks++;
             TBClicks.Text = clicks.ToString();
-
-
-
             //Call the imported function with the cursor's current position
             int X = (int)Cursor.Position.X;
             int Y = (int)Cursor.Position.Y;
-            mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0); // the actual click event.
+
+
+            if (MBToggle == true)
+            {
+                mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, X, Y, 0, 0); // Right click mouse event.
+
+            }
+            else
+            {
+                mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0); // Left click mouse event.
+            }
         }
+
+
     }
 }

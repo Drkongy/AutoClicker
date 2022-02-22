@@ -40,6 +40,9 @@
             this.Delay = new System.Windows.Forms.Timer(this.components);
             this.TBClicks = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnButtonToggle = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.Windowbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BtnExit)).BeginInit();
             this.SuspendLayout();
@@ -135,7 +138,6 @@
             this.TBClicks.ReadOnly = true;
             this.TBClicks.Size = new System.Drawing.Size(128, 21);
             this.TBClicks.TabIndex = 5;
-            this.TBClicks.Text = "100";
             // 
             // label2
             // 
@@ -148,12 +150,50 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Clicks:";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Cooper Black", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.SystemColors.Control;
+            this.label3.Location = new System.Drawing.Point(13, 179);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(102, 16);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Mouse Button";
+            // 
+            // btnButtonToggle
+            // 
+            this.btnButtonToggle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(48)))));
+            this.btnButtonToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnButtonToggle.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnButtonToggle.Location = new System.Drawing.Point(12, 199);
+            this.btnButtonToggle.Name = "btnButtonToggle";
+            this.btnButtonToggle.Size = new System.Drawing.Size(126, 31);
+            this.btnButtonToggle.TabIndex = 7;
+            this.btnButtonToggle.Text = "Left Click";
+            this.btnButtonToggle.UseVisualStyleBackColor = false;
+            this.btnButtonToggle.Click += new System.EventHandler(this.btnButtonToggle_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Cooper Black", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.SystemColors.Control;
+            this.label4.Location = new System.Drawing.Point(7, 232);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(139, 16);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Presss X To Toggle";
+            // 
             // AutoClicker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(34)))), ((int)(((byte)(48)))));
-            this.ClientSize = new System.Drawing.Size(150, 175);
+            this.ClientSize = new System.Drawing.Size(150, 250);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.btnButtonToggle);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.TBClicks);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.BtnConfirm);
@@ -165,7 +205,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AutoClicker";
-            this.Text = "AutoClicker";
+            this.Text = "Press F to Toggle";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.AutoClicker_Load);
             this.Windowbar.ResumeLayout(false);
@@ -188,5 +228,8 @@
         private System.Windows.Forms.Timer Delay;
         private System.Windows.Forms.TextBox TBClicks;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnButtonToggle;
+        private System.Windows.Forms.Label label4;
     }
 }
