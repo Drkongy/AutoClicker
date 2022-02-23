@@ -4,8 +4,10 @@ A small AutoClicker program for fun
 
 Autoclicker 1.0 
 - Clicks speeds are customizable.
+- Can choose which mouse click you want.
+- Added Keybinds.
 - Cool design.
-- Sexy
+- Sexy.
 
 
 
