@@ -52,7 +52,8 @@ namespace Kongolian_Auto_Clicker
         // this is for the keybinds stuff
 
         bool KBRunning = true;
-        bool Pressed = false;
+        int KEY = 88;
+
 
 
 
@@ -118,55 +119,12 @@ namespace Kongolian_Auto_Clicker
             if (TBIntervel.Text != "")
             {
                 Interval.Interval = Int32.Parse(TBIntervel.Text);
-
-                BtnConfirm.Text = "Enable";
-
-                Interval.Enabled = false;
             }
         }
 
-        private void BtnConfirm_Click(object sender, EventArgs e)
-        {
-            //changes the text on the button and starts up the auto clicker.
-            if (Interval.Enabled == true)
-            {
-                Interval.Enabled = false;
-                BtnConfirm.Text = "Enable";
-            }
-            else
-            {
-                Delay.Enabled = true;
 
-            }
-        }
 
-        private void Delay_Tick(object sender, EventArgs e)
-        {
-            // The text that appears on the button when you enable the auto clicker.
-            Delaysecs += 1000;
 
-            if (Delaysecs == 1000)
-            {
-                BtnConfirm.Text = "3";
-            }
-            else if (Delaysecs == 2000)
-            {
-                BtnConfirm.Text = "2";
-            }
-            else if (Delaysecs == 3000)
-            {
-                BtnConfirm.Text = "1";
-
-            }
-            else if (Delaysecs > 3000)
-            {
-                Delay.Enabled = false;
-                BtnConfirm.Text = "Disable";
-                Interval.Enabled = true;
-                Toggle = false;
-                Delaysecs = 0;
-            }
-        }
 
         //Toggle Button allows you to choose between left and right click.
         private void btnButtonToggle_Click(object sender, EventArgs e)
@@ -185,75 +143,73 @@ namespace Kongolian_Auto_Clicker
             }
         }
 
+
+        private void TBKey_TextChanged(object sender, EventArgs e)
+        {
+       
+            if (TBKey.Text != "")
+            {
+
+                for (int i = 0; i <= 255; i++)
+                {
+                    
+                    int keystate = GetAsyncKeyState(i);
+                    if(keystate == 32769)
+                    {
+                        label4.Text = "Press " + TBKey.Text + " To Toggle";
+                        KEY = i;
+                    }
+                }
+
+            }
+
+        }
+
         private void keyBind()
         {
             while (KBRunning)
             {
 
+                Thread.Sleep(5);
 
-
-                int keystate = GetAsyncKeyState(88);
-
-                if (keystate == 32769)
+                int keystate = GetAsyncKeyState(KEY);
+                
+                if (keystate == 32769 || keystate == 32769)
                 {
-                    Pressed = !Pressed;
-                }
-
-                if (Pressed == true)
-                {
-                    Thread.Sleep(Interval.Interval);
-
-                    Interval.Enabled = false;
-
-                    clicks++;
-                    TBClicks.Text = clicks.ToString();
-                    //Call the imported function with the cursor's current position
-                    int X = (int)Cursor.Position.X;
-                    int Y = (int)Cursor.Position.Y;
-
-
-                    if (MBToggle == true)
-                    {
-                        mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, X, Y, 0, 0); // Right click mouse event.
-
-                    }
-                    else
-                    {
-                        mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0); // Left click mouse event.
-                    }
+                    Toggle = !Toggle;
 
                 }
 
-
-
-            
 
             }
 
         }
 
 
-
-
-
         // does the actual clicking
         private void Interval_Tick(object sender, EventArgs e)
         {
-            clicks++;
-            TBClicks.Text = clicks.ToString();
-            //Call the imported function with the cursor's current position
-            int X = (int)Cursor.Position.X;
-            int Y = (int)Cursor.Position.Y;
-
-
-            if (MBToggle == true)
+            if (Toggle == true)
             {
-                mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, X, Y, 0, 0); // Right click mouse event.
 
-            }
-            else
-            {
-                mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0); // Left click mouse event.
+
+                clicks++;
+                TBClicks.Text = clicks.ToString();
+                //Call the imported function with the cursor's current position
+                int X = (int)Cursor.Position.X;
+                int Y = (int)Cursor.Position.Y;
+
+
+                if (MBToggle == true)
+                {
+                    mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, X, Y, 0, 0); // Right click mouse event.
+
+                }
+                else
+                {
+                    mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0); // Left click mouse event.
+                }
+
             }
         }
 

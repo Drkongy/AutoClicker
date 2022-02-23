@@ -35,14 +35,14 @@
             this.BtnExit = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.TBIntervel = new System.Windows.Forms.TextBox();
-            this.BtnConfirm = new System.Windows.Forms.Button();
             this.Interval = new System.Windows.Forms.Timer(this.components);
-            this.Delay = new System.Windows.Forms.Timer(this.components);
             this.TBClicks = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnButtonToggle = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.TBKey = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.Windowbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BtnExit)).BeginInit();
             this.SuspendLayout();
@@ -87,7 +87,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Cooper Black", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(10, 38);
+            this.label1.Location = new System.Drawing.Point(12, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(106, 16);
             this.label1.TabIndex = 1;
@@ -106,34 +106,17 @@
             this.TBIntervel.TextChanged += new System.EventHandler(this.TBIntervel_TextChanged);
             this.TBIntervel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TBIntervel_KeyPress);
             // 
-            // BtnConfirm
-            // 
-            this.BtnConfirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(48)))));
-            this.BtnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnConfirm.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnConfirm.Location = new System.Drawing.Point(10, 84);
-            this.BtnConfirm.Name = "BtnConfirm";
-            this.BtnConfirm.Size = new System.Drawing.Size(126, 31);
-            this.BtnConfirm.TabIndex = 3;
-            this.BtnConfirm.Text = "Enable";
-            this.BtnConfirm.UseVisualStyleBackColor = false;
-            this.BtnConfirm.Click += new System.EventHandler(this.BtnConfirm_Click);
-            // 
             // Interval
             // 
+            this.Interval.Enabled = true;
             this.Interval.Tick += new System.EventHandler(this.Interval_Tick);
-            // 
-            // Delay
-            // 
-            this.Delay.Interval = 1000;
-            this.Delay.Tick += new System.EventHandler(this.Delay_Tick);
             // 
             // TBClicks
             // 
             this.TBClicks.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(34)))), ((int)(((byte)(48)))));
             this.TBClicks.Font = new System.Drawing.Font("Cooper Black", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TBClicks.ForeColor = System.Drawing.Color.White;
-            this.TBClicks.Location = new System.Drawing.Point(13, 146);
+            this.TBClicks.Location = new System.Drawing.Point(10, 106);
             this.TBClicks.Name = "TBClicks";
             this.TBClicks.ReadOnly = true;
             this.TBClicks.Size = new System.Drawing.Size(128, 21);
@@ -144,7 +127,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Cooper Black", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(13, 127);
+            this.label2.Location = new System.Drawing.Point(12, 87);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 16);
             this.label2.TabIndex = 4;
@@ -155,7 +138,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Cooper Black", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(13, 179);
+            this.label3.Location = new System.Drawing.Point(10, 130);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(102, 16);
             this.label3.TabIndex = 6;
@@ -166,7 +149,7 @@
             this.btnButtonToggle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(48)))));
             this.btnButtonToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnButtonToggle.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnButtonToggle.Location = new System.Drawing.Point(12, 199);
+            this.btnButtonToggle.Location = new System.Drawing.Point(12, 153);
             this.btnButtonToggle.Name = "btnButtonToggle";
             this.btnButtonToggle.Size = new System.Drawing.Size(126, 31);
             this.btnButtonToggle.TabIndex = 7;
@@ -179,11 +162,34 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Cooper Black", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.SystemColors.Control;
-            this.label4.Location = new System.Drawing.Point(7, 232);
+            this.label4.Location = new System.Drawing.Point(4, 232);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(139, 16);
             this.label4.TabIndex = 8;
             this.label4.Text = "Presss X To Toggle";
+            // 
+            // TBKey
+            // 
+            this.TBKey.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(34)))), ((int)(((byte)(48)))));
+            this.TBKey.Font = new System.Drawing.Font("Cooper Black", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TBKey.ForeColor = System.Drawing.Color.White;
+            this.TBKey.Location = new System.Drawing.Point(10, 208);
+            this.TBKey.MaxLength = 1;
+            this.TBKey.Name = "TBKey";
+            this.TBKey.Size = new System.Drawing.Size(128, 21);
+            this.TBKey.TabIndex = 10;
+            this.TBKey.TextChanged += new System.EventHandler(this.TBKey_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Cooper Black", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.ForeColor = System.Drawing.SystemColors.Control;
+            this.label5.Location = new System.Drawing.Point(12, 189);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(71, 16);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Keybind:";
             // 
             // AutoClicker
             // 
@@ -191,12 +197,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(34)))), ((int)(((byte)(48)))));
             this.ClientSize = new System.Drawing.Size(150, 250);
+            this.Controls.Add(this.TBKey);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnButtonToggle);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.TBClicks);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.BtnConfirm);
             this.Controls.Add(this.TBIntervel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnExit);
@@ -223,13 +230,13 @@
         private System.Windows.Forms.PictureBox BtnExit;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TBIntervel;
-        private System.Windows.Forms.Button BtnConfirm;
         private System.Windows.Forms.Timer Interval;
-        private System.Windows.Forms.Timer Delay;
         private System.Windows.Forms.TextBox TBClicks;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnButtonToggle;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox TBKey;
+        private System.Windows.Forms.Label label5;
     }
 }

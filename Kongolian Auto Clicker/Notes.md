@@ -1,0 +1,1 @@
+﻿> Need to make sure that when you toggle the auto clicker through keybind it enables from the button also. and make sure when the button is pressed it can be disabled.
