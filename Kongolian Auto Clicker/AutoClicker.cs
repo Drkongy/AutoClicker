@@ -4,6 +4,8 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Threading;
+using DiscordRPC;
+using DiscordRPC.Logging;
 
 
 namespace Kongolian_Auto_Clicker
@@ -56,11 +58,43 @@ namespace Kongolian_Auto_Clicker
 
 
 
+        // discord srv shit
+        public DiscordRpcClient client;
+        bool Initialize = false;
+
+
+
+
+
 
         private void AutoClicker_Load(object sender, EventArgs e)
         {
+            // ini
+            Initialize = true; 
+            client = new DiscordRpcClient("947177821787271210");
+            client.Logger = new ConsoleLogger() { Level = LogLevel.Warning};
+            client.Initialize();
+
+            client.SetPresence(new DiscordRPC.RichPresence()
+            {
+                Details = $"AutoClicking",
+                State = $"www.kongolian.tech",
+                Timestamps = Timestamps.Now,
+                Assets = new Assets()
+                {
+                    LargeImageKey =$"monkiclickercursordarkhd_1",
+                    LargeImageText = $"Clicking fast!"
+                }
+            });
+            
+
+            
+
+            // starts the auto clicker
             Thread KB = new Thread(keyBind);
             KB.Start();
+
+
         }
 
 
@@ -212,7 +246,5 @@ namespace Kongolian_Auto_Clicker
 
             }
         }
-
-
     }
 }
