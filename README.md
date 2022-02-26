@@ -7,6 +7,7 @@ Autoclicker 1.0
 - Can choose which mouse click you want.
 - Added Keybinds.
 - Cool design.
+- connects to discord.
 - Sexy.
 
 
